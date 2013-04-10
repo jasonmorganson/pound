@@ -1,0 +1,20 @@
+{
+  "name": "pound",
+  "version": "0.0.1",
+  "description": "Like webfinger for phones.",
+  "author": "Jason Morganson <jason@morganson.me> (http://jason.morganson.me)",
+  "homepage": "https://github.com/jasonmorganson/pound",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jasonmorganson/pound.git"
+  },
+  "main": "server.js",
+  "engines": {
+    "node": ">= 0.6.0"
+  },
+  "dependencies": {
+    "require-env": "~0.0.3",
+    "twilio": "~1.1.0"
+  },
+  "devDependencies": {}
+}
