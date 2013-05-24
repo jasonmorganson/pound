@@ -19,11 +19,10 @@
     "twilio": "~1.1.0"
   },
   "devDependencies": {
-    "api-easy": "0.3.2",
-    "vows": "0.6.x"
+    "mocha": "1.6.x"
   },
   "scripts": {
-    "test": "mocha",
+    "test": "make test",
     "start": "node app.js"
   },
   "subdomain": "pound"
