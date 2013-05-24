@@ -1,5 +1,3 @@
-deployment:
-    production:
-        branch: master
-        commands:
-            - jitsu deploy
+notify:
+    webhooks:
+        - url: http://webhooks.nodejitsu.com/1/deploy
