@@ -21,6 +21,7 @@
   "devDependencies": {
     "mocha": "1.6.x",
     "mocha-lcov-reporter": "0.0.x",
+    "blanket": "1.1.x",
     "coveralls": "2.0.x"
   },
   "scripts": {
