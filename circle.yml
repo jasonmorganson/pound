@@ -2,11 +2,11 @@ deployment:
   production:
     branch: production
     commands:
-      - jitsu deploy
+      - ./node_modules/.bin/jitsu deploy
   staging:
     branch: master
     commands:
-      - jitsu deploy
+      - ./node_modules/.bin/jitsu deploy
 notify:
     webhooks:
         - url: http://webhooks.nodejitsu.com/1/deploy
