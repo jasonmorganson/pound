@@ -4,6 +4,7 @@
   "description": "Like webfinger for phones.",
   "author": "Jason Morganson <jason@morganson.me> (http://jason.morganson.me)",
   "homepage": "https://github.com/jasonmorganson/pound",
+  "subdomain": "pound",
   "repository": {
     "type": "git",
     "url": "git@github.com:jasonmorganson/pound.git"
@@ -26,10 +27,9 @@
   },
   "scripts": {
     "test": "make test",
-    "start": "node app.js",
+    "start": "node app/app.js",
     "blanket": {
       "pattern": "test"
     }
-  },
-  "subdomain": "pound"
+  }
 }
