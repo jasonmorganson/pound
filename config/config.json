@@ -1,0 +1,9 @@
+{
+  "resourceful": {
+    "dir": "./app/resources",
+    "engine": "couchdb",
+    "database": "pound",
+    "host": "localhost",
+    "port": 5984
+  }
+}

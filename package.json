@@ -9,7 +9,7 @@
     "type": "git",
     "url": "git@github.com:jasonmorganson/pound.git"
   },
-  "main": "server.js",
+  "main": "app/app.js",
   "engines": {
     "node": ">= 0.6.0"
   },
