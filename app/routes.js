@@ -1,55 +1,60 @@
-var fs = require('fs'),
-    errs = require('errs'),
-    plates = require('plates'),
-    director = require('director');
+var fs, errs, plates, director
+
+fs = require('fs')
+errs = require('errs')
+plates = require('plates')
+director = require('director')
 
 exports.attach = function() {
+    var app, onNotFound, onError
 
-    var app = this;
+    app = this
 
-    app.use(require('./server'));
+    app.use(require('./server'))
 
-    app.http.router.get( '/', function() {
+    app.router.get( '/', function() {
+        var req, res, headers, body
 
-        var req = this.req,
-            res = this.res,
-            headers = req.headers || { 'Content-Type': 'text/html' },
-            body = fs.readFileSync( './app/templates/index.html', 'utf-8' );
+        req = this.req
+        res = this.res
+        headers = req.headers || { 'Content-Type': 'text/html' }
+        body = fs.readFileSync( './app/templates/index.html', 'utf-8' )
 
         //body = plates.bind(body, { user: username } );
 
-        res.writeHead(200, headers);
-        res.end(body);
-    });
+        res.writeHead(200, headers)
+        res.end(body)
+    })
 
-    var onNotFound = app.http.router.notfound = function(callback) {
+    onNotFound = app.router.notfound = function(callback) {
+        var req, res, headers, NotFound
 
-        var req = this.req,
-            res = this.res,
-            headers = req.headers || { 'Content-Type': 'text/html' };
-            NotFound = new director.http.NotFound;
+        req = this.req
+        res = this.res
+        headers = req.headers || { 'Content-Type': 'text/html' }
+        NotFound = new director.http.NotFound
 
-        NotFound.message += ': ' + req.url;
-        res.writeHead(404, headers);
-        res.end(NotFound);
-        callback(NotFound, req, res);
-    };
+        NotFound.message += ': ' + req.url
+        res.writeHead(404, headers)
+        res.end(NotFound.message)
+        callback(NotFound, req, res)
+    }
 
-    var onError = app.http.onError = function(err, req, res) {
+    onError = app.http.onError = function(err, req, res) {
+        var status, headers, body
 
-        var status = err.status || 500,
-            headers = err.headers || { 'Content-Type': 'text/html' },
-            body = err.message || err.body.error || "Error";
+        status = err.status || 500
+        headers = err.headers || { 'Content-Type': 'text/html' }
+        body = err.message || err.body.error || "Error"
 
         if (err) {
 
-            if (err.status >= 500) { app.log.error(body); }
-            else if (err.status >= 400) { app.log.warn(body); }
-            else { app.log.debug(body); }
+            if (err.status >= 500) app.log.error(body)
+            else if (err.status >= 400) app.log.warn(body)
+            else app.log.debug(body)
 
-            res.writeHead(status, headers);
-            res.end(body);
+            res.writeHead(status, headers)
+            res.end(body)
         }
-    };
-
-};
+    }
+}
