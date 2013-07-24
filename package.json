@@ -20,6 +20,7 @@
     "plates": "0.4.8",
     "winston": "0.7.2",
     "flatiron": "0.3.8",
+    "director": "1.1.10",
     "resourceful": "0.3.3",
     "restful": "0.4.4"
   },
