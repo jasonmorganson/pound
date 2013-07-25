@@ -13,17 +13,15 @@ exports.attach = function() {
     app.use(require('./server'))
 
     app.router.get( '/', function() {
-        var req, res, headers, body
+        var req, res, headers, body, filename
 
         req = this.req
         res = this.res
         headers = req.headers || { 'Content-Type': 'text/html' }
-        body = fs.readFileSync( './app/templates/index.html', 'utf-8' )
 
-        //body = plates.bind(body, { user: username } );
-
-        res.writeHead(200, headers)
-        res.end(body)
+        filename = './app/templates/index.html'
+        body = fs.createReadStream(filename);
+        body.pipe(res)
     })
 
     onNotFound = app.router.notfound = function(callback) {
