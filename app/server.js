@@ -1,8 +1,11 @@
-var flatiron = require('flatiron');
+var flatiron
+
+flatiron = require('flatiron')
 
 exports.attach = function() {
+    var app
 
-    var app = this;
+    app = this
 
-    app.use(flatiron.plugins.http);
-};
+    app.use(flatiron.plugins.http)
+}

@@ -1,20 +1,20 @@
-var flatiron = require('flatiron');
+var flatiron
+
+flatiron = require('flatiron')
 
 exports.attach = function() {
+    var app
 
-    var app = this,
-        env = process.env.NODE_ENV || 'development';
-
-    app.use(flatiron.plugins.config);
+    app = this
 
     app.config
         .argv()
         .env('_')
         .file( 'config/config.json' )
-        .file( 'env', 'config/' + env + '.json' )
+        .file( 'env', 'config/' + app.config.get('env') + '.json' )
         .defaults({
             'http': {
                 'port': 80
             }
-        });
-};
+        })
+}
