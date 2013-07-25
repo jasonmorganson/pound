@@ -1,9 +1,11 @@
-var fs, errs, plates, director
+var fs, path, errs, flatiron, plates, director
 
 fs = require('fs')
+path = require('path')
 errs = require('errs')
 plates = require('plates')
 director = require('director')
+flatiron = require('flatiron')
 
 exports.attach = function() {
     var app, onNotFound, onError
@@ -12,6 +14,11 @@ exports.attach = function() {
 
     app.use(require('./server'))
 
+    app.use(flatiron.plugins.static)
+
+    app.static(path.join(__dirname, '../public'))
+    app.static(path.join(__dirname, '../vendor'))
+
     app.router.get( '/', function() {
         var req, res, headers, body, filename
 
@@ -19,7 +26,7 @@ exports.attach = function() {
         res = this.res
         headers = req.headers || { 'Content-Type': 'text/html' }
 
-        filename = './app/templates/index.html'
+        filename = path.join(__dirname, '/templates/index.html')
         body = fs.createReadStream(filename);
         body.pipe(res)
     })
