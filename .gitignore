@@ -4,6 +4,11 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile ~/.gitignore_global
 
+# Ignore components
+/components
+/public/components.js
+/public/components.css
+
 # Ignore NPM modules
 /node_modules
 
