@@ -26,14 +26,18 @@
     "restful": "0.4.4"
   },
   "devDependencies": {
+    "component": "0.x",
     "mocha": "1.6.x",
     "mocha-lcov-reporter": "0.0.x",
     "blanket": "1.1.x",
     "coveralls": "2.0.x"
   },
   "scripts": {
+    "postinstall": "make build",
+    "build": "make build",
+    "run": "make run",
+    "start": "make run",
     "test": "make test",
-    "start": "node app/app.js",
     "blanket": {
       "pattern": "test"
     }
