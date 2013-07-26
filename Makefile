@@ -37,3 +37,11 @@ run: build
 test:
 	@${bin}/mocha
 
+clean:
+	rm -f $(CSS)
+	rm -f $(COMPRESSED)
+	rm -f $(CONCATINATED)
+	rm -f $(MINIFIED)
+	rm -fr components
+	rm -fr node_modules
+
