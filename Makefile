@@ -1,9 +1,31 @@
 bin := ./node_modules/.bin
 
-.PHONY: build install run test
+STYLES = $(wildcard app/assets/stylesheets/*.styl)
+CSS = $(STYLES:.styl=.css)
+COMPRESSED = $(STYLES:.styl=.min.css)
+CONCATINATED = public/styles.css
+MINIFIED = public/styles.min.css
 
-build:
-	@${bin}/component build --out public --name components
+.SUFFIXES:
+.SUFFIXES: .css .styl
+.PHONY: all build install run test clean
+
+all: run
+
+%.css : %.styl
+	@${bin}/styl < $< > $@
+
+%.min.css : %.styl
+	@${bin}/styl -c < $< > $@
+
+$(CONCATINATED): $(CSS)
+	@cat $^ > $@
+
+$(MINIFIED): $(COMPRESSED)
+	@cat $^ > $@
+
+build: $(CONCATINATED) $(MINIFIED)
+	@${bin}/component build --out public
 
 install:
 	@npm install

@@ -1,4 +1,7 @@
 {
+  "styles": [
+    "public/styles.css"
+  ],
   "dependencies": {
     "necolas/normalize.css": "*"
   }
