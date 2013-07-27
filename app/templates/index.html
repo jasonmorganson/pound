@@ -120,6 +120,12 @@
                 // When the form looses focus
                 email.onblur = function() {
 
+                    // In case the user leaves the input without starting typing
+                    if (email.className.indexOf('placeheld') === -1) {
+                        email.className += " placeheld"
+                        email.setAttribute('placeholder', "Enter an email address")
+                    }
+
                     if (!emailMatcher.test(email.value)) {
 
                         email.removeClass('valid')
