@@ -11,20 +11,126 @@
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title></title>
+        <title>#</title>
         <meta name="description" content="">
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="build.css">
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans">
 
     </head>
 
     <body>
 
-        <h1>Welcome!</h1>
+        <div class="container">
+
+            <div class="top">
+
+                <div>
+                    <p id="pound">#</p>
+                </div>
+            </div>
+
+            <div class="middle">
+
+                <div class="form">
+
+                    <form id="form">
+                        <input id="email" class="email" name="email" type="text" placeholder="Email" />
+                    </form>
+
+                </div>
+
+            </div>
+
+            <div class="bottom">
+
+                <div id="phone"></div>
+
+                <div id="help">
+                    <p>Enter any email address to lookup the phone number.<br />
+                       If the number is not registered, you can do so after
+                       you've verified that you're the owner of the email.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
 
         <script src="build.js"></script>
+
+        <script>
+
+            Element.prototype.addClass = function(className) {
+
+                if (this.className.indexOf(className) === -1) {
+                    this.className += ' ' + className
+                }
+            }
+
+            Element.prototype.removeClass = function(className) {
+
+                this.className = this.className.replace(className,'').trim()
+            }
+
+            function update() {
+                var email, emailMatcher
+
+                emailMatcher = /^..*@.*.$/i
+
+                email = document.forms['form'].email
+
+                // On every key press
+                email.onkeydown = function() {
+
+                    // Once the user starts typing, if we see the placeholder
+                    // text again its surely its in error
+                    if (email.className.indexOf('placeheld') === -1) {
+                        email.className += " placeheld"
+                        email.setAttribute('placeholder', "Enter an email address")
+                    }
+
+                    // Clear the error class if the user is trying
+                    email.className = email.className.replace("error",'').trim()
+                    email.removeClass('error')
+                }
+
+                // On every key press
+                email.onkeyup = function() {
+
+                    // If the input matches (roughly) an email
+                    if (emailMatcher.test(email.value)) {
+
+                        email.removeClass('error')
+                        email.addClass('valid')
+
+                        // Start checking email
+                        console.log(email.value)
+
+                    } else {
+
+                        email.removeClass('valid')
+                    }
+
+                }
+
+                // When the form looses focus
+                email.onblur = function() {
+
+                    if (!emailMatcher.test(email.value)) {
+
+                        email.removeClass('valid')
+                        email.addClass('error')
+                    }
+                }
+            }
+
+            document.addEventListener("DOMContentLoaded", update)
+
+        </script>
 
     </body>
 
