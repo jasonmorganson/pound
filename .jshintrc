@@ -1,9 +1,7 @@
 {
-    // Environments
-    "browser": false,  // Web Browser (window, document, etc)
-    "devel": false,    // Development/debugging (alert, confirm, etc)
-    "node": true,      // Node.js
-
-    "asi": true,       // Tolerate Automatic Semicolon Insertion (no semicolons)
-    "onevar": true,    // Allow only one `var` statement per function
+    "asi": true,
+    "onevar": true,
+    "browser": false,
+    "devel": false,
+    "node": true
 }
