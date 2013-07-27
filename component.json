@@ -1,8 +1,10 @@
 {
+  "name": "pound",
   "styles": [
     "public/styles.css"
   ],
   "dependencies": {
-    "necolas/normalize.css": "*"
+    "necolas/normalize.css": "*",
+    "component/classes": "*"
   }
 }

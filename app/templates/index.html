@@ -64,17 +64,7 @@
 
         <script>
 
-            Element.prototype.addClass = function(className) {
-
-                if (this.className.indexOf(className) === -1) {
-                    this.className += ' ' + className
-                }
-            }
-
-            Element.prototype.removeClass = function(className) {
-
-                this.className = this.className.replace(className,'').trim()
-            }
+            var classes = require('classes')
 
             function update() {
                 var email, emailMatcher
@@ -88,14 +78,13 @@
 
                     // Once the user starts typing, if we see the placeholder
                     // text again its surely its in error
-                    if (email.className.indexOf('placeheld') === -1) {
-                        email.className += " placeheld"
+                    if (! classes(email).has('placeheld')) {
+                        classes(email).add('placeheld')
                         email.setAttribute('placeholder', "Enter an email address")
                     }
 
                     // Clear the error class if the user is trying
-                    email.className = email.className.replace("error",'').trim()
-                    email.removeClass('error')
+                    classes(email).remove('error')
                 }
 
                 // On every key press
@@ -104,15 +93,15 @@
                     // If the input matches (roughly) an email
                     if (emailMatcher.test(email.value)) {
 
-                        email.removeClass('error')
-                        email.addClass('valid')
+                        classes(email).remove('error')
+                        classes(email).add('valid')
 
                         // Start checking email
                         console.log(email.value)
 
                     } else {
 
-                        email.removeClass('valid')
+                        classes(email).remove('valid')
                     }
 
                 }
@@ -121,15 +110,15 @@
                 email.onblur = function() {
 
                     // In case the user leaves the input without starting typing
-                    if (email.className.indexOf('placeheld') === -1) {
-                        email.className += " placeheld"
+                    if (! classes(email).has('placeheld')) {
+                        classes(email).add('placeheld')
                         email.setAttribute('placeholder', "Enter an email address")
                     }
 
                     if (!emailMatcher.test(email.value)) {
 
-                        email.removeClass('valid')
-                        email.addClass('error')
+                        classes(email).remove('valid')
+                        classes(email).add('error')
                     }
                 }
             }
