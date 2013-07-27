@@ -64,66 +64,17 @@
 
         <script>
 
-            var classes = require('classes')
+            var emailinput = require('emailinput')
 
-            function update() {
-                var email, emailMatcher
-
-                emailMatcher = /^..*@.*.$/i
+            function init() {
+                var email
 
                 email = document.forms['form'].email
 
-                // On every key press
-                email.onkeydown = function() {
-
-                    // Once the user starts typing, if we see the placeholder
-                    // text again its surely its in error
-                    if (! classes(email).has('placeheld')) {
-                        classes(email).add('placeheld')
-                        email.setAttribute('placeholder', "Enter an email address")
-                    }
-
-                    // Clear the error class if the user is trying
-                    classes(email).remove('error')
-                }
-
-                // On every key press
-                email.onkeyup = function() {
-
-                    // If the input matches (roughly) an email
-                    if (emailMatcher.test(email.value)) {
-
-                        classes(email).remove('error')
-                        classes(email).add('valid')
-
-                        // Start checking email
-                        console.log(email.value)
-
-                    } else {
-
-                        classes(email).remove('valid')
-                    }
-
-                }
-
-                // When the form looses focus
-                email.onblur = function() {
-
-                    // In case the user leaves the input without starting typing
-                    if (! classes(email).has('placeheld')) {
-                        classes(email).add('placeheld')
-                        email.setAttribute('placeholder', "Enter an email address")
-                    }
-
-                    if (!emailMatcher.test(email.value)) {
-
-                        classes(email).remove('valid')
-                        classes(email).add('error')
-                    }
-                }
+                emailinput(email);
             }
 
-            document.addEventListener("DOMContentLoaded", update)
+            document.addEventListener("DOMContentLoaded", init)
 
         </script>
 
