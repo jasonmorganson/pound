@@ -3,6 +3,7 @@ var fs, path, errs, flatiron, plates, director
 fs = require('fs')
 path = require('path')
 errs = require('errs')
+filed = require('filed')
 plates = require('plates')
 director = require('director')
 flatiron = require('flatiron')
@@ -20,15 +21,14 @@ exports.attach = function() {
     app.static(path.join(__dirname, '../vendor'))
 
     app.router.get( '/', function() {
-        var req, res, headers, body, filename
+        var req, res, headers, body, templates
 
         req = this.req
         res = this.res
-        headers = req.headers || { 'Content-Type': 'text/html' }
 
-        filename = path.join(__dirname, '/templates/index.html')
-        body = fs.createReadStream(filename);
-        body.pipe(res)
+        templates = path.join(__dirname, '/templates')
+
+        req.pipe(filed(templates)).pipe(res)
     })
 
     onNotFound = app.router.notfound = function(callback) {
