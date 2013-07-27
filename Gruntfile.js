@@ -2,6 +2,19 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
+    jshint: {
+      options: {
+        jshintrc: '.jshintrc'
+      },
+      all: ['Gruntfile.js', 'app/**/*.js', 'test/**/*.js'],
+      gruntfile: {
+        src: 'Gruntfile.js'
+      },
+      app: {
+        src: ['app/**/*.js']
+      }
+
+    },
 
     concat: {
       dist: {
@@ -55,10 +68,12 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-styl')
   grunt.loadNpmTasks('grunt-component')
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
+  grunt.registerTask('lint', ['jshint:all'])
   grunt.registerTask('default', ['component', 'styl', 'concat', 'cssmin', 'uglify'])
 
 }
