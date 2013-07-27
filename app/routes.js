@@ -1,10 +1,11 @@
-var fs, path, errs, flatiron, plates, director
+var fs, path, errs, flatiron, plates, director, oppressor
 
 fs = require('fs')
 path = require('path')
 errs = require('errs')
 filed = require('filed')
 plates = require('plates')
+oppressor = require('oppressor')
 director = require('director')
 flatiron = require('flatiron')
 
@@ -28,7 +29,7 @@ exports.attach = function() {
 
         templates = path.join(__dirname, '/templates')
 
-        req.pipe(filed(templates)).pipe(res)
+        filed(templates).pipe(oppressor(req)).pipe(res);
     })
 
     onNotFound = app.router.notfound = function(callback) {
