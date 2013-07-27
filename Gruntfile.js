@@ -2,11 +2,42 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
-    styl: {
+
+    concat: {
+      dist: {
+        src: ['public/*.css'],
+        dest: 'public/styles.css'
+      }
+    },
+
+    cssmin: {
+      minify: {
+        options: {
+          keepSpecialComments: 0
+        },
+        files: {
+          'public/styles.min.css': ['public/styles.css']
+        }
+      }
+    },
+
+    uglify: {
       dist: {
         files: {
-          'public/styles.css': 'app/assets/stylesheets/*.styl'
+          'public/scripts.min.js': ['public/*.js']
         }
+      }
+    },
+
+    styl: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: 'app/assets/stylesheets/',
+          src: ['*.styl'],
+          dest: 'public/',
+          ext: '.css'
+        }],
       }
     },
 
@@ -24,7 +55,10 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-styl')
   grunt.loadNpmTasks('grunt-component')
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  grunt.registerTask('default', ['styl','component'])
+  grunt.registerTask('default', ['component', 'styl', 'concat', 'cssmin', 'uglify'])
 
 }
