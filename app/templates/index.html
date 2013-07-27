@@ -64,17 +64,16 @@
 
         <script>
 
+            var domready = require('domready')
             var emailinput = require('emailinput')
 
-            function init() {
+            domready(function() {
                 var email
 
                 email = document.forms['form'].email
 
                 emailinput(email);
-            }
-
-            document.addEventListener("DOMContentLoaded", init)
+            });
 
         </script>
 

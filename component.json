@@ -5,6 +5,7 @@
   ],
   "dependencies": {
     "necolas/normalize.css": "*",
+    "components/domready": "*",
     "jasonmorganson/emailinput": "*"
   }
 }
