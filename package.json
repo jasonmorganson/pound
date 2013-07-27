@@ -30,6 +30,9 @@
   "devDependencies": {
     "styl": "0.2.3",
     "component": "0.x",
+    "grunt": "~0.4.1",
+    "grunt-styl": "~0.2.0",
+    "grunt-component": "~0.1.4",
     "mocha": "1.6.x",
     "mocha-lcov-reporter": "0.0.x",
     "blanket": "1.1.x",
