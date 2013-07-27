@@ -65,15 +65,19 @@
         <script>
 
             var domready = require('domready')
-            var emailinput = require('emailinput')
+            var EmailInput = require('emailinput')
 
             domready(function() {
                 var email
 
                 email = document.forms['form'].email
 
-                emailinput(email);
-            });
+                var emailinput = new EmailInput(email);
+
+                emailinput.on('valid', function(email) {
+                    console.log(email)
+                })
+            })
 
         </script>
 
